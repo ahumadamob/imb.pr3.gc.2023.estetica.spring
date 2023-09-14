@@ -1,4 +1,4 @@
-package imb.pr3.estetica.entidad;
+package imb.pr3.estetica.entity;
 
 import jakarta.persistence.*;
 
