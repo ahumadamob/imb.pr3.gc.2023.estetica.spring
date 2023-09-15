@@ -1,16 +1,19 @@
 package imb.pr3.estetica.service;
 
+import imb.pr3.estetica.entity.MetodoDePago;
+
 import java.util.List;
 
-public interface BaseService <E> {
+public interface IMetodoDePagoService {
 
-    public List<E> findall() throws Exception;
+    public List<MetodoDePago> findall() throws Exception;
 
-    public E findById (Long id)throws Exception;
 
-    public E save (E entity)throws Exception;
+    MetodoDePago findById(Integer id) throws Exception;
 
-    public E update(Long id, E entity) throws Exception;
+    public MetodoDePago save (MetodoDePago entity)throws Exception;
 
-    public boolean delete(Long id) throws Exception;
+    public MetodoDePago update(Integer id, MetodoDePago entity) throws Exception;
+
+    public boolean delete(Integer id) throws Exception;
 }

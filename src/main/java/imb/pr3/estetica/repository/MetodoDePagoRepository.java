@@ -1,11 +1,11 @@
-package imb.pr3.estetica.repositorio;
+package imb.pr3.estetica.repository;
 
-import imb.pr3.estetica.entidad.MetodoDePago;
+import imb.pr3.estetica.entity.MetodoDePago;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MetodoDePagoRepositorio extends JpaRepository<MetodoDePago, Long> {
+public interface MetodoDePagoRepository extends JpaRepository<MetodoDePago, Integer> {
 
 }
 

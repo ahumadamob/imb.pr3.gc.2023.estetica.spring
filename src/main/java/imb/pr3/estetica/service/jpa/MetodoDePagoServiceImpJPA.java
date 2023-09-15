@@ -1,7 +1,8 @@
-package imb.pr3.estetica.service;
+package imb.pr3.estetica.service.jpa;
 
 import imb.pr3.estetica.entity.MetodoDePago;
 import imb.pr3.estetica.repository.MetodoDePagoRepository;
+import imb.pr3.estetica.service.IMetodoDePagoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

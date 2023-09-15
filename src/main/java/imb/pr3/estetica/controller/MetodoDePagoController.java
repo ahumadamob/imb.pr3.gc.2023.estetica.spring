@@ -1,62 +1,82 @@
-package imb.pr3.estetica.controlador;
+package imb.pr3.estetica.controller;
 
-import imb.pr3.estetica.entidad.MetodoDePago;
-import imb.pr3.estetica.servicio.MetodoDePagoServicio;
+import imb.pr3.estetica.entity.MetodoDePago;
+import imb.pr3.estetica.service.IMetodoDePagoService;
+import imb.pr3.estetica.service.jpa.MetodoDePagoServiceImpJPA;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "estetica/metodo_de_pago")
-public class MetodoDePagoControlador {
-private MetodoDePagoServicio metodoDePagoServicio;
+public class MetodoDePagoController {
+    private IMetodoDePagoService metodoDePagoService;
+    List<String> errorMessages = new ArrayList<>();
 
-    public MetodoDePagoControlador(MetodoDePagoServicio metodoDePagoServicio) {
-        this.metodoDePagoServicio = metodoDePagoServicio;
-    }
     @GetMapping("")
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<APIResponse<List<MetodoDePago>>> getAll() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(metodoDePagoServicio.findall());
+            APIResponse<List<MetodoDePago>> response = new APIResponse<List<MetodoDePago>>(200, null, metodoDePagoService.findall());
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error, Por Favor Intente mas tarde.\"}");
+            errorMessages.add("Error, Por Favor Intente más tarde.");
+            APIResponse<List<MetodoDePago>> errorResponse = new APIResponse<>(404, errorMessages, null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity <?> getOne(@PathVariable Long id){
+    public ResponseEntity<APIResponse<MetodoDePago>> getOne(@PathVariable Integer id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(metodoDePagoServicio.findById(id));
+            APIResponse<MetodoDePago> response = new APIResponse<MetodoDePago>(200, null, metodoDePagoService.findById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error, Por Favor Intente mas tarde.\"}");
+            errorMessages.add("No se pudo encontrar su Metodo de pago por id");
+            APIResponse<MetodoDePago> errorResponse = new APIResponse<>(404, errorMessages, null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
     }
 
     @PostMapping("")
-    public ResponseEntity <?> save(@RequestBody MetodoDePago entity){
+    public ResponseEntity<APIResponse<MetodoDePago>> save(@RequestBody MetodoDePago entity) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(metodoDePagoServicio.save(entity));
+            APIResponse<MetodoDePago> response = new APIResponse<>(200, null, metodoDePagoService.save(entity));
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, Por Favor Intente mas tarde.\"}");
+            errorMessages.add("No se pudo guardar su método de pago");
+            APIResponse<MetodoDePago> errorResponse = new APIResponse<>(404, errorMessages, null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity <?> edit(@PathVariable Long id, @RequestBody MetodoDePago entity){
+    public ResponseEntity<APIResponse<MetodoDePago>> edit(@PathVariable Integer id, @RequestBody MetodoDePago entity) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(metodoDePagoServicio.update(id, entity));
+            APIResponse<MetodoDePago> response = new APIResponse<>(200, null, metodoDePagoService.update(id, entity));
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, Por Favor Intente mas tarde.\"}");
+            errorMessages.add("No se pudo Actualizar su método de pago");
+            APIResponse<MetodoDePago> errorResponse = new APIResponse<>(404, errorMessages, null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity <?> delete(@PathVariable Long id){
+    public ResponseEntity<APIResponse<MetodoDePago>> delete(@PathVariable Integer id) {
         try {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(metodoDePagoServicio.delete(id));
+            boolean deleted = metodoDePagoService.delete(id);
+            if (deleted) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, Por Favor Intente mas tarde.\"}");
+            // Manejar cualquier excepción si es necesario
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }

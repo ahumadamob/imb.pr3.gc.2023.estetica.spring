@@ -1,4 +1,4 @@
-package imb.pr3.estetica.entidad;
+package imb.pr3.estetica.entity;
 
 import jakarta.persistence.*;
 
@@ -8,7 +8,7 @@ public class MetodoDePago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "habilitado")
@@ -17,16 +17,19 @@ public class MetodoDePago {
     public MetodoDePago() {
     }
 
-    public MetodoDePago(Long id, String nombre, Boolean habilitado) {
+    public MetodoDePago(Integer id, String nombre, Boolean habilitado) {
         this.id = id;
         this.nombre = nombre;
         this.habilitado = habilitado;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
