@@ -1,4 +1,4 @@
-package imb.pr3.estetica.servicio;
+package imb.pr3.estetica.service;
 
 import java.util.List;
 
