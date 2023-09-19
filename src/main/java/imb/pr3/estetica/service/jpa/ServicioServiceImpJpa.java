@@ -1,7 +1,8 @@
-package imb.pr3.estetica.service;
+package imb.pr3.estetica.service.jpa;
 
 import imb.pr3.estetica.entity.Servicio;
 import imb.pr3.estetica.repository.ServicioRepository;
+import imb.pr3.estetica.service.IServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ServicioServiceImpJpa implements IServicioService<IServicioService> {
+public class ServicioServiceImpJpa implements IServicioService {
     @Autowired
     private ServicioRepository servicioRepository;
 
@@ -21,32 +22,29 @@ public class ServicioServiceImpJpa implements IServicioService<IServicioService>
 
     @Override
     public Servicio buscarServicioPorId(Integer id) {
-        Optional <Servicio> optional = servicioRepository.findById(Long.valueOf(id));
-        if (optional.isPresent()){
+        Optional<Servicio> optional = servicioRepository.findById(id);
+        if (optional.isPresent()) {
             return optional.get();
-        }else{
+        } else {
             return null;
         }
     }
 
     @Override
-    public void guardarServicio(Servicio servicio) {
-        servicioRepository.save(servicio);
+    public Servicio guardarServicio(Servicio servicio) {
+        return servicioRepository.save(servicio);
     }
 
     @Override
-    public void eliminarServicio(Integer id) {
-        Optional<Servicio> optional = servicioRepository.findById(Long.valueOf(id));
+    public Servicio eliminarServicio(Integer id) {
+        Optional<Servicio> optional = servicioRepository.findById(id);
+        Servicio servicio = null;
         if (optional.isPresent()) {
             // Extrae el objeto Servicio del Optional y luego elimínalo
-            Servicio servicio = optional.get();
+            servicio = optional.get();
             servicioRepository.delete(servicio);
         }
+        return servicio;
     }
 
-
-    @Override
-    public void crearServicio(Servicio cliente) {
-
-    }
 }
