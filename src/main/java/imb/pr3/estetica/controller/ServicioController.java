@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "estetica/servicio")
 public class ServicioController {
     @Autowired
-    IServicioService servicioService;
+    private IServicioService servicioService;
 
 
     @GetMapping("")
@@ -47,6 +47,7 @@ public class ServicioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
     }
+
     @PostMapping("")
     public ResponseEntity<APIResponse<Servicio>> guardarServicio(@RequestBody Servicio servicio) {
         try {
@@ -71,6 +72,7 @@ public class ServicioController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<APIResponse<Servicio>> actualizarServicio(@PathVariable Integer id, @RequestBody Servicio servicio) {
         try {
@@ -97,6 +99,7 @@ public class ServicioController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<APIResponse<Void>> eliminarServicio(@PathVariable Integer id) {
         try {
