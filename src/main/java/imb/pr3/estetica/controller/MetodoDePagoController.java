@@ -3,6 +3,7 @@ package imb.pr3.estetica.controller;
 import imb.pr3.estetica.entity.MetodoDePago;
 import imb.pr3.estetica.service.IMetodoDePagoService;
 import imb.pr3.estetica.service.jpa.MetodoDePagoServiceImpJPA;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,12 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "estetica/metodo_de_pago")
 public class MetodoDePagoController {
+    @Autowired
     private IMetodoDePagoService metodoDePagoService;
     List<String> errorMessages = new ArrayList<>();
 
     @GetMapping("")
-    public ResponseEntity<APIResponse<List<MetodoDePago>>> getAll() {
+    public ResponseEntity<APIResponse<List<MetodoDePago>>> traerTodos() {
         try {
             APIResponse<List<MetodoDePago>> response = new APIResponse<List<MetodoDePago>>(200, null, metodoDePagoService.findall());
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -30,7 +32,7 @@ public class MetodoDePagoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<APIResponse<MetodoDePago>> getOne(@PathVariable Integer id) {
+    public ResponseEntity<APIResponse<MetodoDePago>> traerUno(@PathVariable Integer id) {
         try {
             APIResponse<MetodoDePago> response = new APIResponse<MetodoDePago>(200, null, metodoDePagoService.findById(id));
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -42,7 +44,7 @@ public class MetodoDePagoController {
     }
 
     @PostMapping("")
-    public ResponseEntity<APIResponse<MetodoDePago>> save(@RequestBody MetodoDePago entity) {
+    public ResponseEntity<APIResponse<MetodoDePago>> guardarUno(@RequestBody MetodoDePago entity) {
         try {
             APIResponse<MetodoDePago> response = new APIResponse<>(200, null, metodoDePagoService.save(entity));
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -54,9 +56,9 @@ public class MetodoDePagoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<APIResponse<MetodoDePago>> edit(@PathVariable Integer id, @RequestBody MetodoDePago entity) {
+    public ResponseEntity<APIResponse<MetodoDePago>> actualizarUno(@PathVariable Integer id, @RequestBody MetodoDePago entity) {
         try {
-            APIResponse<MetodoDePago> response = new APIResponse<>(200, null, metodoDePagoService.update(id, entity));
+            APIResponse<MetodoDePago> response = new APIResponse<>(200, null, metodoDePagoService.save(entity));
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             errorMessages.add("No se pudo Actualizar su método de pago");
@@ -66,7 +68,7 @@ public class MetodoDePagoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<APIResponse<MetodoDePago>> delete(@PathVariable Integer id) {
+    public ResponseEntity<APIResponse<MetodoDePago>> borrarUno(@PathVariable Integer id) {
         try {
             boolean deleted = metodoDePagoService.delete(id);
             if (deleted) {
