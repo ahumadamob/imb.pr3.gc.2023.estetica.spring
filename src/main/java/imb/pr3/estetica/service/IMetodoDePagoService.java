@@ -13,7 +13,5 @@ public interface IMetodoDePagoService {
 
     public MetodoDePago save (MetodoDePago entity)throws Exception;
 
-    public MetodoDePago update(Integer id, MetodoDePago entity) throws Exception;
-
     public boolean delete(Integer id) throws Exception;
 }

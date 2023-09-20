@@ -16,7 +16,7 @@ public class MetodoDePagoServiceImpJPA implements IMetodoDePagoService {
 
     @Override
     public List<MetodoDePago> findall() throws Exception {
-             try {
+        try {
             List<MetodoDePago> entities = metodoDePagoRepository.findAll();
             return entities;
         } catch (Exception e) {
@@ -38,18 +38,6 @@ public class MetodoDePagoServiceImpJPA implements IMetodoDePagoService {
     public MetodoDePago save(MetodoDePago entity) throws Exception {
         try {
             return metodoDePagoRepository.save(entity);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    public MetodoDePago update(Integer id, MetodoDePago entity) throws Exception {
-        try {
-            Optional<MetodoDePago> entityOptional = metodoDePagoRepository.findById(id);
-            MetodoDePago MetodoDePago = entityOptional.get();
-            MetodoDePago = metodoDePagoRepository.save(entity);
-            return MetodoDePago;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
