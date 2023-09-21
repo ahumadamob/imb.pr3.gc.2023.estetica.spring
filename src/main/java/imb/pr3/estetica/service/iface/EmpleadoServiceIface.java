@@ -1,15 +1,17 @@
 package imb.pr3.estetica.service.iface;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import imb.pr3.estetica.entities.Empleado;
 
 
 public interface EmpleadoServiceIface {
-	List<Empleado> obtenerTodosLosEmpleados();
-	public void crearEmpleado(Empleado empleado);
-	public Empleado  obtenerEmpleadoPorId(int id);
-	public void modificarEmpleado(int id , Empleado empleado);
-	public void eliminarEmpleado(int id);
+	List<Empleado> busquedaGeneral();
+	public Empleado busquedaId(int id);
+	/*public void nuevoObjeto(Empleado empleado);*/
+	public void objetoModificado(int id , Empleado empleado);
+	public void eliminarObjeto(int id);
+	public Empleado save(Empleado empleado);
+
 }

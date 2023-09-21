@@ -1,6 +1,7 @@
 package imb.pr3.estetica.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,31 +26,31 @@ public class EmpleadoController {
 	
 	@GetMapping("/empleados")
 	public List<Empleado> verEmpleados() {
-		return service.obtenerTodosLosEmpleados();
+		return service.busquedaGeneral();
 	}
 	
 	@GetMapping("/empleados/{id}")
 	@ResponseBody
 	public Empleado empleadoId(@PathVariable int id) {
-		return service.obtenerEmpleadoPorId(id);
+		return service.busquedaId(id);
 	}
 	
 	@PutMapping("/empleados/{id}")
 	public Empleado empleadoModificado(@RequestBody Empleado empleado , @PathVariable int id) {
-		service.modificarEmpleado(id,empleado);
+		service.objetoModificado(id, empleado);
 		return empleado;
 	}
 	
 	
-	@PostMapping("/empleados/nuevo-empleado")
+	@PostMapping("/empleados")
 	public Empleado nuevoEmpleado(@RequestBody Empleado empleado) {
-		service.crearEmpleado(empleado);
+		service.save(empleado);
 		return empleado;
 	}
 	
 	@DeleteMapping("/empleados/{id}")
 	public String empleadoEliminado(@PathVariable int id) {
-		service.eliminarEmpleado(id);
+		service.eliminarObjeto(id);
 		return "Empleado Despedido";
 	}
 	

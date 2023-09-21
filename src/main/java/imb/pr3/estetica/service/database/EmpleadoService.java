@@ -17,23 +17,30 @@ public class EmpleadoService implements EmpleadoServiceIface {
 	private EmpleadoRepository repositoryEmpleado;
 	
 	@Override
-	public List<Empleado> obtenerTodosLosEmpleados() {
+	public List<Empleado> busquedaGeneral() {
 		return repositoryEmpleado.findAll();
 	}
 	
 	@Override
-	public Empleado obtenerEmpleadoPorId(int id){
+	public Empleado busquedaId(int id){
 		Optional <Empleado> empleadoPorId = repositoryEmpleado.findById(id);
 		return empleadoPorId.get();
 	}
 	
-	@Override
-	public void crearEmpleado(Empleado empleado){
+	
+	/*@Override
+	public void nuevoObjeto(Empleado empleado){
 		repositoryEmpleado.save(empleado);
+	}*/
+	
+	@Override
+	public Empleado save(Empleado empleado) {
+		repositoryEmpleado.save(empleado);
+		return empleado;
 	}
 	
 	@Override
-	public void modificarEmpleado(int id,Empleado empleado ) {
+	public void objetoModificado(int id,Empleado empleado ) {
 		
 		Optional<Empleado> empleadoModificado = repositoryEmpleado.findById(id);
 		Empleado empl = empleadoModificado.get();
@@ -44,15 +51,15 @@ public class EmpleadoService implements EmpleadoServiceIface {
 		empl.setDomicilio(empleado.getDomicilio());
 		empl.setGenero(empleado.getGenero());
 		empl.setNumero_telefono(empleado.getNumero_telefono());
-		
+		empleado = repositoryEmpleado.save(empl);
 	}
 
 	@Override
-	public void eliminarEmpleado(int id) {
+	public void eliminarObjeto(int id) {
 		repositoryEmpleado.deleteById(id);
 		
 	}
-	
+
 	
 	
 	
