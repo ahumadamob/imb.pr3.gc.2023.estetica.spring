@@ -3,7 +3,8 @@ package imb.pr3.estetica.controller;
 import java.util.List;
 
 public class APIResponse <T> {
-	private int status;
+
+  private int status;
 	private List <String> messages;
 	private T data;
 	
@@ -31,5 +32,4 @@ public class APIResponse <T> {
 	public void setData(T data) {
 		this.data = data;
 	}
-	
 }
