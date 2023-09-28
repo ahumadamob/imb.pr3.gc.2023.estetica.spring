@@ -1,6 +1,8 @@
 package imb.pr3.estetica.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 
 @Entity
 @Table(name = "metodoDePago")
@@ -10,6 +12,7 @@ public class MetodoDePago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "nombre")
+    @NotBlank(message = "El nombre no puede estar vacío")
     private String nombre;
     @Column(name = "habilitado")
     private Boolean habilitado;
