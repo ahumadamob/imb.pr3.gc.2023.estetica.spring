@@ -9,7 +9,5 @@ public interface IClienteService {
 	Cliente buscarClientePorId(Integer id);
 	public void guardarCliente(Cliente cliente);
 	public void eliminarCliente (Integer id);
-	public void crearCliente (Cliente cliente);
-	
-	
+	public void crearCliente (Cliente cliente);	
 }

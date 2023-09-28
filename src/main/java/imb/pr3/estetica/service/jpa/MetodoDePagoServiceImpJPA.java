@@ -12,48 +12,31 @@ import java.util.Optional;
 @Service
 public class MetodoDePagoServiceImpJPA implements IMetodoDePagoService {
     @Autowired
-    MetodoDePagoRepository metodoDePagoRepository;
+    private MetodoDePagoRepository repo;
 
     @Override
-    public List<MetodoDePago> findall() throws Exception {
-        try {
-            List<MetodoDePago> entities = metodoDePagoRepository.findAll();
-            return entities;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public List<MetodoDePago> buscarTodos(){
+    	return repo.findAll();
     }
 
     @Override
-    public MetodoDePago findById(Integer id) throws Exception {
-        try {
-            Optional<MetodoDePago> entityOptional = metodoDePagoRepository.findById(id);
-            return entityOptional.get();
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public MetodoDePago buscarPorId(Integer id) {
+        Optional<MetodoDePago> opt = repo.findById(id);
+        return opt.orElse(null);
     }
-
+    
     @Override
-    public MetodoDePago save(MetodoDePago entity) throws Exception {
-        try {
-            return metodoDePagoRepository.save(entity);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public MetodoDePago guardar(MetodoDePago metodoDePago) {
+    	return repo.save(metodoDePago);
     }
-
+    
     @Override
-    public boolean delete(Integer id) throws Exception {
-        try {
-            if (metodoDePagoRepository.existsById(id)) {
-                metodoDePagoRepository.deleteById(id);
-                return true;
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public void eliminar(Integer id) {
+    	repo.deleteById(id);
+    }
+    
+    @Override
+    public boolean existe(Integer id) {
+    	return (id == null) ? false: repo.existsById(id);
     }
 }
