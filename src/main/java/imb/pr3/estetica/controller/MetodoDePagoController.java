@@ -34,9 +34,14 @@ public class MetodoDePagoController {
 
     @PostMapping("")
     public ResponseEntity<APIResponse<MetodoDePago>> guardarUnMetodoDePago(@RequestBody MetodoDePago metodoDePago) {
-        return metodoDePagoService.existe(metodoDePago.getId()) ? ResponseUtil.badRequest("Ya existe el medio de pago")
-                : ResponseUtil.success(metodoDePago);
+        if (metodoDePagoService.existe(metodoDePago.getId())) {
+            return ResponseUtil.badRequest("Ya existe el medio de pago");
+        } else {
+            MetodoDePago metodoGuardado = metodoDePagoService.guardar(metodoDePago);
+            return ResponseUtil.success(metodoGuardado);
+        }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<APIResponse<MetodoDePago>> actualizarUnMetodoDePago(@PathVariable Integer id, @RequestBody MetodoDePago metodoDePago) {
@@ -49,7 +54,6 @@ public class MetodoDePagoController {
         if (metodoDePagoService.existe(id)) {
             metodoDePagoService.eliminar(id);
             return ResponseUtil.success(null);
-
         } else {
             return ResponseUtil.badRequest("No se pudo eliminar el Método de pago");
         }
