@@ -6,12 +6,14 @@ import java.util.List;
 
 public interface IMetodoDePagoService {
 
-    public List<MetodoDePago> findall() throws Exception;
+    public List<MetodoDePago> buscarTodos();
 
 
-    MetodoDePago findById(Integer id) throws Exception;
+    MetodoDePago buscarPorId(Integer id);
 
-    public MetodoDePago save (MetodoDePago entity)throws Exception;
+    public MetodoDePago guardar(MetodoDePago entity);
 
-    public boolean delete(Integer id) throws Exception;
+    public boolean eliminar(Integer id);
+
+    public boolean existe(Integer id);
 }

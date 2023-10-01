@@ -15,45 +15,35 @@ public class MetodoDePagoServiceImpJPA implements IMetodoDePagoService {
     MetodoDePagoRepository metodoDePagoRepository;
 
     @Override
-    public List<MetodoDePago> findall() throws Exception {
-        try {
-            List<MetodoDePago> entities = metodoDePagoRepository.findAll();
-            return entities;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+    public List<MetodoDePago> buscarTodos() {
+        List<MetodoDePago> entities = metodoDePagoRepository.findAll();
+        return entities;
+
+    }
+
+    @Override
+    public MetodoDePago buscarPorId(Integer id) {
+        Optional<MetodoDePago> entityOptional = metodoDePagoRepository.findById(id);
+        return entityOptional.get();
+    }
+
+    @Override
+    public MetodoDePago guardar(MetodoDePago entity) {
+        return metodoDePagoRepository.save(entity);
+    }
+
+    @Override
+    public boolean eliminar(Integer id) {
+        if (metodoDePagoRepository.existsById(id)) {
+            metodoDePagoRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
         }
     }
 
     @Override
-    public MetodoDePago findById(Integer id) throws Exception {
-        try {
-            Optional<MetodoDePago> entityOptional = metodoDePagoRepository.findById(id);
-            return entityOptional.get();
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    public MetodoDePago save(MetodoDePago entity) throws Exception {
-        try {
-            return metodoDePagoRepository.save(entity);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    public boolean delete(Integer id) throws Exception {
-        try {
-            if (metodoDePagoRepository.existsById(id)) {
-                metodoDePagoRepository.deleteById(id);
-                return true;
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public boolean existe(Integer id) {
+        return (id == null) ? false: metodoDePagoRepository.existsById(id);
     }
 }
