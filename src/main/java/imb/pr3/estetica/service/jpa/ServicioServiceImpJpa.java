@@ -16,12 +16,12 @@ public class ServicioServiceImpJpa implements IServicioService {
 
 
     @Override
-    public List<Servicio> buscarServicio() {
+    public List<Servicio> buscarTodos() {
         return servicioRepository.findAll();
     }
 
     @Override
-    public Servicio buscarServicioPorId(Integer id) {
+    public Servicio buscarPorId(Integer id) {
         Optional<Servicio> optional = servicioRepository.findById(id);
         if (optional.isPresent()) {
             return optional.get();
@@ -31,12 +31,12 @@ public class ServicioServiceImpJpa implements IServicioService {
     }
 
     @Override
-    public Servicio guardarServicio(Servicio servicio) {
+    public Servicio guardar(Servicio servicio) {
         return servicioRepository.save(servicio);
     }
 
     @Override
-    public Servicio eliminarServicio(Integer id) {
+    public Servicio eliminar(Integer id) {
         Optional<Servicio> optional = servicioRepository.findById(id);
         Servicio servicio = null;
         if (optional.isPresent()) {
@@ -45,6 +45,11 @@ public class ServicioServiceImpJpa implements IServicioService {
             servicioRepository.delete(servicio);
         }
         return servicio;
+    }
+
+    @Override
+    public boolean existe(Integer id) {
+        return (id == null) ? false : servicioRepository.existsById(id);
     }
 
 }
