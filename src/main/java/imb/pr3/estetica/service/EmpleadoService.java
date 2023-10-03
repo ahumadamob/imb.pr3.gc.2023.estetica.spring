@@ -1,20 +1,22 @@
-package imb.pr3.estetica.service.database;
+package imb.pr3.estetica.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import imb.pr3.estetica.entities.Empleado;
+
+import imb.pr3.estetica.entity.Empleado;
 import imb.pr3.estetica.repository.EmpleadoRepository;
-import imb.pr3.estetica.service.iface.EmpleadoServiceIface;
+import imb.pr3.estetica.service.jpa.EmpleadoServiceImplJpa;
 
 
 @Service
-public class EmpleadoService implements EmpleadoServiceIface {
+public class EmpleadoService implements EmpleadoServiceImplJpa {
 
 	@Autowired
 	private EmpleadoRepository repositoryEmpleado;
+	
 	
 	@Override
 	public List<Empleado> busquedaGeneral() {
