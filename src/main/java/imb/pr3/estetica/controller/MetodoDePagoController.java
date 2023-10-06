@@ -24,7 +24,6 @@ public class MetodoDePagoController {
 
 	@GetMapping("")
 	public ResponseEntity<APIResponse<List<MetodoDePago>>> obtenerTodosMetodosDePago() {
-		System.out.println("LLegue al servicio!!!!!!!!!!");
 		List<MetodoDePago> metodosDePago = metodoDePagoService.buscarTodos();
 		return metodosDePago.isEmpty() ? ResponseUtil.notFound("No hay métodos de Pago")
 				: ResponseUtil.success(metodosDePago);
@@ -54,7 +53,7 @@ public class MetodoDePagoController {
 	public ResponseEntity<APIResponse<MetodoDePago>> deleteTask(@PathVariable("id") Integer id){
 		if (metodoDePagoService.existe(id)) {
 			metodoDePagoService.eliminar(id);  // Eliminar el servicio con el ID proporcionado
-			return ResponseUtil.success(null);  // Se ha eliminado exitosamente
+			return ResponseUtil.successDeleted("se logro borrar con exito el Método de Pago");  // Se ha eliminado exitosamente
 		} else {
 			return ResponseUtil.badRequest("No existe el método de pago con el identificador proporcionado");
 		}
