@@ -17,21 +17,30 @@ public class MetodoDePago {
     @Column(name = "habilitado")
     private Boolean habilitado;
 
+    @ManyToOne
+    private OrdenDePago ordenDePago;
+
+
     public MetodoDePago() {
     }
 
-    public MetodoDePago(Integer id, String nombre, Boolean habilitado) {
+    public MetodoDePago(Integer id, String nombre, Boolean habilitado, OrdenDePago ordenDePago) {
         this.id = id;
         this.nombre = nombre;
         this.habilitado = habilitado;
+        this.ordenDePago = ordenDePago;
+    }
+
+    public OrdenDePago getOrdenDePago() {
+        return ordenDePago;
+    }
+
+    public void setOrdenDePago(OrdenDePago ordenDePago) {
+        this.ordenDePago = ordenDePago;
     }
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNombre() {
