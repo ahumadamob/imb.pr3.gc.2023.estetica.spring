@@ -1,5 +1,7 @@
 package imb.pr3.estetica.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,10 +15,10 @@ public class Cliente{
 	private Integer id;
 	private String nombre;
 	private String apellido;
-	private Integer edad;
-	private String sexo;
-	private String fecha_nacimiento;
+	private String genero;
+	private String fechaDeNacimiento;
 	private String correo;
+	private String telefono;
 	
 	public Integer getId() {
 		return id;
@@ -37,28 +39,30 @@ public class Cliente{
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	public Integer getEdad() {
-		return edad;
-	}
-	public void setEdad(Integer edad) {
-		this.edad = edad;
-	}
+	
 	public String getSexo() {
-		return sexo;
+		return genero;
 	}
 	public void setSexo(String sexo) {
-		this.sexo = sexo;
+		this.genero = sexo;
 	}
-	public String getFecha_nacimiento() {
-		return fecha_nacimiento;
-	}
-	public void setFecha_nacimiento(String fecha_nacimiento) {
-		this.fecha_nacimiento = fecha_nacimiento;
-	}
+
 	public String getCorreo() {
 		return correo;
 	}
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+	public String getFechaDeNacimiento() {
+		return fechaDeNacimiento;
+	}
+	public void setFechaDeNacimiento(String fechaDeNacimiento) {
+		this.fechaDeNacimiento = fechaDeNacimiento;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 }
