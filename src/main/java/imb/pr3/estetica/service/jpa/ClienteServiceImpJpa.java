@@ -18,29 +18,29 @@ public class ClienteServiceImpJpa implements IClienteService {
 	ClienteRepository repo;
 	
 	@Override
-	public List<Cliente> buscarCliente() {
+	public List<Cliente> buscarTodos() {
 		return repo.findAll();
 	}
 
 	@Override
-	public void guardarCliente(Cliente cliente) {
-		repo.save(cliente);
+	public Cliente guardar(Cliente cliente) {
+		return repo.save(cliente);
 	}
 
 	@Override
-	public void eliminarCliente(Integer id) {
+	public void eliminar(Integer id) {
 		repo.deleteById(id);;
 	}
 
 
 	@Override
-	public void crearCliente(Cliente cliente) {
+	public void crear(Cliente cliente) {
 		repo.save(cliente);
 		
 	}
 
 	@Override
-	public Cliente buscarClientePorId(Integer id) {
+	public Cliente buscarPorId(Integer id) {
 	    Optional<Cliente> optional = repo.findById(id);
 	    if (optional.isPresent()) {
 	        return optional.get();
@@ -48,6 +48,12 @@ public class ClienteServiceImpJpa implements IClienteService {
 	        return null;
 	    }
 	}
-	
+
+	@Override
+	public boolean existe(Integer id) {
+		return(id ==null)? false:repo.existsById(id);
+	}
+
+
 		
 }
