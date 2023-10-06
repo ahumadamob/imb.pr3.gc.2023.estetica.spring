@@ -5,9 +5,11 @@ import java.util.List;
 import imb.pr3.estetica.entity.Cliente;
 
 public interface IClienteService {
-	List<Cliente> buscarCliente();
-	Cliente buscarClientePorId(Integer id);
-	public void guardarCliente(Cliente cliente);
-	public void eliminarCliente (Integer id);
-	public void crearCliente (Cliente cliente);	
+	Cliente buscarPorId(Integer id);
+	List<Cliente> buscarTodos();
+	public Cliente guardar(Cliente cliente);
+	public void crear (Cliente cliente);
+	public void eliminar(Integer id);
+	public boolean existe(Integer id);
+		
 }
