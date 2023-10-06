@@ -8,18 +8,18 @@ import org.springframework.stereotype.Service;
 
 import imb.pr3.estetica.entity.Empleado;
 import imb.pr3.estetica.repository.EmpleadoRepository;
-import imb.pr3.estetica.service.jpa.EmpleadoServiceImplJpa;
+import imb.pr3.estetica.service.jpa.IEmpleadoService;
 
 
 @Service
-public class EmpleadoService implements EmpleadoServiceImplJpa {
+public class EmpleadoService implements IEmpleadoService {
 
 	@Autowired
 	private EmpleadoRepository repositoryEmpleado;
 	
 	
 	@Override
-	public List<Empleado> busquedaGeneral() {
+	public List<Empleado> buscarTodos() {
 		return repositoryEmpleado.findAll();
 	}
 	
