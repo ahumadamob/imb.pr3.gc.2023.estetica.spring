@@ -26,7 +26,7 @@ public class Cliente{
 	private String apellido;
 	
 	private int genero;
-	private String fechaDeNacimiento;
+	private Date fechaDeNacimiento;
 	
 	@Email(message = "El correo electrónico no es válido")
 	@NotBlank(message= "El campo correo no puede estar vacio")
@@ -65,10 +65,10 @@ public class Cliente{
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	public String getFechaDeNacimiento() {
+	public Date getFechaDeNacimiento() {
 		return fechaDeNacimiento;
 	}
-	public void setFechaDeNacimiento(String fechaDeNacimiento) {
+	public void setFechaDeNacimiento(Date fechaDeNacimiento) {
 		this.fechaDeNacimiento = fechaDeNacimiento;
 	}
 	public String getTelefono() {

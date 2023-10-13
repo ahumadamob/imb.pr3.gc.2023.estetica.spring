@@ -50,7 +50,7 @@ public class ClienteController {
 	//crearNuevo
 	
 	@PostMapping
-    public ResponseEntity<APIResponse<Cliente>> crearMetodoDePago(@RequestBody Cliente cliente, BindingResult result) {
+    public ResponseEntity<APIResponse<Cliente>> crearCliente(@RequestBody Cliente cliente, BindingResult result) {
         return clienteService.existe(cliente.getId()) ? ResponseUtil.badRequest("No se puede crear cliente, el ID ingresado ya existe")
         		: ResponseUtil.success(cliente);
      }
