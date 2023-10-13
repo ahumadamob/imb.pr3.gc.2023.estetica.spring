@@ -1,11 +1,16 @@
 package imb.pr3.estetica.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import imb.pr3.estetica.entities.Turno;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 
 @Entity 
@@ -13,12 +18,26 @@ public class Cliente{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotBlank(message= "El campo nombre no puede estar vacio")
 	private String nombre;
+	
+	@NotBlank(message= "El campo apellido no puede estar vacio")
 	private String apellido;
-	private String genero;
+	
+	private int genero;
 	private String fechaDeNacimiento;
+	
+	@Email(message = "El correo electrónico no es válido")
+	@NotBlank(message= "El campo correo no puede estar vacio")
 	private String correo;
+	
 	private String telefono;
+	
+	// Define la relación OneToMany con la entidad Turno
+    @OneToMany(mappedBy = "cliente")
+    private List<Turno> turnos;
+    
 	
 	public Integer getId() {
 		return id;
@@ -39,13 +58,6 @@ public class Cliente{
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	
-	public String getSexo() {
-		return genero;
-	}
-	public void setSexo(String sexo) {
-		this.genero = sexo;
-	}
 
 	public String getCorreo() {
 		return correo;
@@ -64,5 +76,11 @@ public class Cliente{
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+	public int getGenero() {
+		return genero;
+	}
+	public void setGenero(int genero) {
+		this.genero = genero;
 	}
 }
