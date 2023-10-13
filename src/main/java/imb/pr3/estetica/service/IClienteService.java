@@ -8,7 +8,6 @@ public interface IClienteService {
 	Cliente buscarPorId(Integer id);
 	List<Cliente> buscarTodos();
 	public Cliente guardar(Cliente cliente);
-	public void crear (Cliente cliente);
 	public void eliminar(Integer id);
 	public boolean existe(Integer id);
 		

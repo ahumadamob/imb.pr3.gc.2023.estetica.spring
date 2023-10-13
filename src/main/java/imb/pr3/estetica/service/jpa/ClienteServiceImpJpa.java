@@ -32,21 +32,13 @@ public class ClienteServiceImpJpa implements IClienteService {
 		repo.deleteById(id);;
 	}
 
-
-	@Override
-	public void crear(Cliente cliente) {
-		repo.save(cliente);
-		
-	}
-
 	@Override
 	public Cliente buscarPorId(Integer id) {
 	    Optional<Cliente> optional = repo.findById(id);
-	    if (optional.isPresent()) {
-	        return optional.get();
-	    } else {
-	        return null;
-	    }
+	    //valor de return donde se utiliza el metodo orElse de Optional
+	    // Si "optional" tiene un valor ,quiere decir que encontró una entidad con el ID indicado entonces devuelve el valor
+	    // En caso de que "optional" se encuentra vacio, quiere decir que no se encuentra ninguna entidad con el ID indicado,por lo que devuelve un "null"
+	    return optional.orElse(null);
 	}
 
 	@Override
