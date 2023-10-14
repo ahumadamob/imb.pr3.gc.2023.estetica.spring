@@ -1,9 +1,16 @@
 package imb.pr3.estetica.entity;
 
+import java.util.Date;
+import java.util.List;
+
+import imb.pr3.estetica.entities.Turno;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 
 @Entity 
@@ -11,12 +18,26 @@ public class Cliente{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotBlank(message= "El campo nombre no puede estar vacio")
 	private String nombre;
+	
+	@NotBlank(message= "El campo apellido no puede estar vacio")
 	private String apellido;
-	private Integer edad;
-	private String sexo;
-	private String fecha_nacimiento;
+	
+	private int genero;
+	private Date fechaDeNacimiento;
+	
+	@Email(message = "El correo electrónico no es válido")
+	@NotBlank(message= "El campo correo no puede estar vacio")
 	private String correo;
+	
+	private String telefono;
+	
+	// Define la relación OneToMany con la entidad Turno
+    @OneToMany(mappedBy = "cliente")
+    private List<Turno> turnos;
+    
 	
 	public Integer getId() {
 		return id;
@@ -37,28 +58,29 @@ public class Cliente{
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	public Integer getEdad() {
-		return edad;
-	}
-	public void setEdad(Integer edad) {
-		this.edad = edad;
-	}
-	public String getSexo() {
-		return sexo;
-	}
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-	public String getFecha_nacimiento() {
-		return fecha_nacimiento;
-	}
-	public void setFecha_nacimiento(String fecha_nacimiento) {
-		this.fecha_nacimiento = fecha_nacimiento;
-	}
+
 	public String getCorreo() {
 		return correo;
 	}
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+	public Date getFechaDeNacimiento() {
+		return fechaDeNacimiento;
+	}
+	public void setFechaDeNacimiento(Date fechaDeNacimiento) {
+		this.fechaDeNacimiento = fechaDeNacimiento;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	public int getGenero() {
+		return genero;
+	}
+	public void setGenero(int genero) {
+		this.genero = genero;
 	}
 }

@@ -18,36 +18,34 @@ public class ClienteServiceImpJpa implements IClienteService {
 	ClienteRepository repo;
 	
 	@Override
-	public List<Cliente> buscarCliente() {
+	public List<Cliente> buscarTodos() {
 		return repo.findAll();
 	}
 
 	@Override
-	public void guardarCliente(Cliente cliente) {
-		repo.save(cliente);
+	public Cliente guardar(Cliente cliente) {
+		return repo.save(cliente);
 	}
 
 	@Override
-	public void eliminarCliente(Integer id) {
+	public void eliminar(Integer id) {
 		repo.deleteById(id);;
 	}
 
-
 	@Override
-	public void crearCliente(Cliente cliente) {
-		repo.save(cliente);
-		
-	}
-
-	@Override
-	public Cliente buscarClientePorId(Integer id) {
+	public Cliente buscarPorId(Integer id) {
 	    Optional<Cliente> optional = repo.findById(id);
-	    if (optional.isPresent()) {
-	        return optional.get();
-	    } else {
-	        return null;
-	    }
+	    //valor de return donde se utiliza el metodo orElse de Optional
+	    // Si "optional" tiene un valor ,quiere decir que encontró una entidad con el ID indicado entonces devuelve el valor
+	    // En caso de que "optional" se encuentra vacio, quiere decir que no se encuentra ninguna entidad con el ID indicado,por lo que devuelve un "null"
+	    return optional.orElse(null);
 	}
-	
+
+	@Override
+	public boolean existe(Integer id) {
+		return(id ==null)? false:repo.existsById(id);
+	}
+
+
 		
 }
