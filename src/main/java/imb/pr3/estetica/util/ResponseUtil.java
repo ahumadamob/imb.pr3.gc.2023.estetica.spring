@@ -38,7 +38,7 @@ public class ResponseUtil {
     }
 
     public static <T> ResponseEntity<APIResponse<T>> notFound(String message) {
-        APIResponse<T> response = new APIResponse<>(HttpStatus.NOT_FOUND.value(), addSingleMessage(message), null);
+        APIResponse<T> response = new APIResponse<>(HttpStatus.NOT_FOUND.value(), message(message), null);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
