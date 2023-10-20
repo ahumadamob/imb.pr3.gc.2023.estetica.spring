@@ -3,8 +3,10 @@ package imb.pr3.estetica.controller;
 import java.util.List;
 
 import imb.pr3.estetica.util.ResponseUtil;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import imb.pr3.estetica.entity.Empleado;
-import imb.pr3.estetica.service.jpa.IEmpleadoService;
+import imb.pr3.estetica.service.IEmpleadoService;
 
 @RestController
+@Validated
 @RequestMapping("/api/estetica/empleado")
 public class EmpleadoController {
 	
@@ -34,6 +37,7 @@ public class EmpleadoController {
 	@GetMapping("/{id}")
 	@ResponseBody
 	public ResponseEntity<APIResponse<Empleado>> empleadoId(@PathVariable int id) {
+
 		Empleado empleado = service.buscarPorId(id);
 		return empleado == null ? ResponseUtil.notFound("No se encontro el numero de empleado") : ResponseUtil.success(empleado);
 	}
@@ -43,7 +47,7 @@ public class EmpleadoController {
 		return service.existe(empleado.getId()) ? ResponseUtil.success(service.guardar(empleado)) : ResponseUtil.badRequest("No se pudo modificar el empleado");
 
 	}
-	
+
 	@PostMapping("") /* Esto es una anotación de Spring Framework que se utiliza para mapear las solicitudes HTTP POST a un controlador en específico.
 						  el valor que esté entre las dos comillas dobles y dentro de los paréntesis ("/post") indica que este método maneja las solicitudes
 						  	POST en el path que se indica. */
@@ -63,10 +67,8 @@ public class EmpleadoController {
 			service.eliminar(id);
 			return ResponseUtil.successDeleted("Se despidio el Empleado");
 		} else {
-			return ResponseUtil.badRequest("No existe el método de pago con el identificador proporcionado");
+			return ResponseUtil.badRequest("No existe el empleado con el identificador proporcionado");
 		}
-
-	//	return service.existe(id) ? ResponseUtil.success(null) : ResponseUtil.badRequest("NO EXISTE TAL EMPLEADO");
 	}
 
 	
