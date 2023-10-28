@@ -3,6 +3,7 @@ package imb.pr3.estetica.entities;
 import java.util.Date;
 
 import imb.pr3.estetica.entity.Cliente;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +21,7 @@ public class Turno {
     
     // Establece la relación ManyToOne con la entidad Cliente
     @ManyToOne
-    @JoinColumn(name = "id") // Nombre de la columna que referencia al cliente
+    @JoinColumn(name = "id_cliente") // Nombre de la columna que referencia al cliente
     private Cliente cliente;
     
     public Integer getId() {
