@@ -70,19 +70,15 @@ public class ClienteController {
 	//Se define el método "eliminarCliente" que toma como parametro de entrada un "id" tipo Integer
 	// El metodo devuelve un objeto ResponseEntity que contiene un objeto APIResponse de tipo Cliente
 	//La anotación "@PathVariable" indica que el valor de "id" se tomará de la URL como parametro de ruta.Este valor se convertirá automáticamente en un objeto 
-	//Integer llamado "id" y se pasará como argumento al método
+	//Integer llamado "id" y se pasará como argumento al método.
 	public ResponseEntity<APIResponse<Cliente>> eliminarCliente(@PathVariable("id") Integer id) {
-		//Se llama al método "existe" del servicio "clienteService" para verificar si el ID del cliente existe. 
-		if (clienteService.existe(id)) {
-			// Si la condición "clienteService.existe(id)" es verdadera, quiere decir que el cliente existe, por lo tanto, se elimina al cliente identificado por el ID
-			clienteService.eliminar(id);
-			// Devuelve como respuesta un mensaje HTTP successDeleted avisando que el cliente fue eliminado correctamente
-			return ResponseUtil.successDeleted("El cliente con ID ingresado fue eliminado");
-		}else {
-			// Si la condición "clienteService.existe(id)" es falsa, significa que el cliente no existe, por lo que se genera una respuesta HTTP de error BadRequest con un mensaje que indica que el cliente no existe
-    		//Esto se envuelve en un objeto ResponseEntity que contiene un objeto APIResponse de tipo Cliente
-			return ResponseUtil.badRequest("No existe el cliente con el ID ingresado");
-		}
+	     //Se llama al método "existe" del servicio "clienteService" para verificar si el ID del cliente existe. 
+	    // Si la condición "clienteService.existe(id)" es verdadera, quiere decir que el cliente existe, por lo tanto, se elimina al cliente identificado por el ID
+	    // No se devuelve ningún contenido en este caso, solo se confirma la eliminación exitosa
+	    return clienteService.existe(id) ? ResponseUtil.success(null)
+	            // Si la condición "clienteService.existe(id)" es falsa, significa que el cliente no existe, por lo que se genera una respuesta HTTP de error BadRequest con un mensaje que indica que el cliente no existe
+	    		//Esto se envuelve en un objeto ResponseEntity que contiene un objeto APIResponse de tipo Cliente
+	            : ResponseUtil.badRequest("No existe el cliente con el ID ingresado");
 	}
 		
 	// Excepciones

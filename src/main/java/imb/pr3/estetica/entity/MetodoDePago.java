@@ -20,18 +20,8 @@ public class MetodoDePago {
     public MetodoDePago() {
     }
 
-    public MetodoDePago(Integer id, String nombre, Boolean habilitado) {
-        this.id = id;
-        this.nombre = nombre;
-        this.habilitado = habilitado;
-    }
-
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNombre() {

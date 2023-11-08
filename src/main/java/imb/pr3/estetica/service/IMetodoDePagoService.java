@@ -9,6 +9,6 @@ public interface IMetodoDePagoService {
     public List<MetodoDePago> buscarTodos();
     public MetodoDePago buscarPorId(Integer id);
     public MetodoDePago guardar (MetodoDePago metodoDePago);
-    public void eliminar(Integer id);
+    public boolean eliminar(Integer id);
     public boolean existe(Integer id);
 }
