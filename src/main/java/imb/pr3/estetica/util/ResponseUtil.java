@@ -27,13 +27,18 @@ public class ResponseUtil {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    public static <T> ResponseEntity<APIResponse<T>> successDeleted(String message) {
+        APIResponse<T> response = new APIResponse<>(HttpStatus.OK.value(), message(message), null);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     public static <T> ResponseEntity<APIResponse<T>> error(HttpStatus status, String message) {
         APIResponse<T> response = new APIResponse<>(status.value(), addSingleMessage(message), null);
         return ResponseEntity.status(status).body(response);
     }
 
     public static <T> ResponseEntity<APIResponse<T>> notFound(String message) {
-        APIResponse<T> response = new APIResponse<>(HttpStatus.NOT_FOUND.value(), addSingleMessage(message), null);
+        APIResponse<T> response = new APIResponse<>(HttpStatus.NOT_FOUND.value(), message(message), null);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
@@ -51,18 +56,15 @@ public class ResponseUtil {
         return ResponseEntity.badRequest().body(response);
     }
 
-    public static <T> ResponseEntity<APIResponse<T>> successDeleted(String message) {
-        APIResponse<T> response = new APIResponse<>(HttpStatus.OK.value(), message(message) , null);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
-    }
     private static List<String> addSingleMessage(String message) {
         List<String> messages = new ArrayList<>();
         messages.add(message);
         return messages;
     }
-    public static List<String> message(String message) {
+    private static List<String> message(String message){
         List<String> messages = new ArrayList<>();
         messages.add(message);
         return messages;
+
     }
 }
