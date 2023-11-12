@@ -1,4 +1,4 @@
- package imb.pr3.estetica.entities;
+ package imb.pr3.estetica.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
