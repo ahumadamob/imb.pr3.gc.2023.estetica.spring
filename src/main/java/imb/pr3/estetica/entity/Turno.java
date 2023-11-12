@@ -1,9 +1,7 @@
-package imb.pr3.estetica.entities;
+package imb.pr3.estetica.entity;
 
 import java.util.Date;
 
-import imb.pr3.estetica.entity.Cliente;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

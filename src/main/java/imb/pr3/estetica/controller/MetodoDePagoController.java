@@ -53,7 +53,7 @@ public class MetodoDePagoController {
 	public ResponseEntity<APIResponse<MetodoDePago>> deleteTask(@PathVariable("id") Integer id){
 		if (metodoDePagoService.existe(id)) {
 			metodoDePagoService.eliminar(id);  // Eliminar el servicio con el ID proporcionado
-			return ResponseUtil.succQ1essDeleted("se logro borrar con exito el Método de Pago");  // Se ha eliminado exitosamente
+			return ResponseUtil.successDeleted("se logro borrar con exito el Método de Pago");  // Se ha eliminado exitosamente
 		} else {
 			return ResponseUtil.badRequest("No existe el método de pago con el identificador proporcionado");
 		}
