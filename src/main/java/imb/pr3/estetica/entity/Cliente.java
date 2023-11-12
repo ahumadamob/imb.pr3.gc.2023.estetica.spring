@@ -3,7 +3,6 @@ package imb.pr3.estetica.entity;
 import java.util.Date;
 import java.util.List;
 
-import imb.pr3.estetica.entities.Turno;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
