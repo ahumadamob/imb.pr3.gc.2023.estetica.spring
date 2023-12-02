@@ -2,6 +2,7 @@ package imb.pr3.estetica.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 
 @Entity
@@ -16,8 +17,27 @@ public class MetodoDePago {
     private String nombre;
     @Column(name = "habilitado")
     private Boolean habilitado;
+    @NotBlank(message = "el campo no puede estar en blanco")
+    @NotEmpty(message = "el campo no puede estar vacio")
+    @NotEmpty(message = "el campo no puede estar nulo")
+    private String codigo;
 
     public MetodoDePago() {
+    }
+
+    public MetodoDePago(Integer id, String nombre, Boolean habilitado, String codigo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.habilitado = habilitado;
+        this.codigo = codigo;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public Integer getId() {

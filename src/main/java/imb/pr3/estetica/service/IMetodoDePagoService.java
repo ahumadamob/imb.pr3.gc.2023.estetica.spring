@@ -11,4 +11,5 @@ public interface IMetodoDePagoService {
     public MetodoDePago guardar (MetodoDePago metodoDePago);
     public boolean eliminar(Integer id);
     public boolean existe(Integer id);
+    public List<MetodoDePago> encontrarCodigo(String codigo);
 }
