@@ -70,4 +70,11 @@ public class MetodoDePagoController {
 		return ResponseUtil.handleConstraintException(ex);
 	}
 
+	@GetMapping("/codigo/{codigo}")
+	public ResponseEntity<APIResponse<List<MetodoDePago>>> buscarHabilitados(@PathVariable("codigo") String codigo){
+		List<MetodoDePago> tipoComidaHabilitadas = metodoDePagoService.encontrarCodigo(codigo);
+		return tipoComidaHabilitadas.isEmpty() ? ResponseUtil.notFound("No Metodo de pago con este codigo  ")
+				: ResponseUtil.success(tipoComidaHabilitadas);
+	}
+
 }

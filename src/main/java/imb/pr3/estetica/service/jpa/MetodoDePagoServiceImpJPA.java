@@ -56,4 +56,11 @@ public class MetodoDePagoServiceImpJPA implements IMetodoDePagoService {
         // Este método verifica si un método de pago con el ID especificado existe en la base de datos.
         return (id == null) ? false : metodoDePagoRepository.existsById(id);
     }
+
+    @Override
+    public List<MetodoDePago> encontrarCodigo(String codigo) {
+        return metodoDePagoRepository.findByCodigo(codigo);
+    }
+
+
 }
